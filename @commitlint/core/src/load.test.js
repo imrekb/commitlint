@@ -21,6 +21,12 @@ test('uses seed as configured', async t => {
 	t.is(actual.rules.foo, 'bar');
 });
 
+test('uses seed with parserPreset', async t => {
+	t.context.back = chdir('fixtures/parser-preset');
+	const actual = await load({parserPreset: './conventional-changelog-custom'});
+	t.truthy(actual.parserOpts);
+});
+
 test('invalid extend should throw', t => {
 	t.context.back = chdir('fixtures/extends-invalid');
 	t.throws(load());
